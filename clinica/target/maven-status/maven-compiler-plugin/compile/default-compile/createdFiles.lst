@@ -1,0 +1,12 @@
+br\ufc\quixada\stream\PessoasInputStream.class
+br\ufc\quixada\stream\AnimaisInputStream.class
+br\ufc\quixada\stream\PessoasOutputStream.class
+br\ufc\quixada\entities\Animal.class
+br\ufc\quixada\models\ICliente.class
+br\ufc\quixada\Server.class
+br\ufc\quixada\entities\Coelho.class
+br\ufc\quixada\entities\Cliente.class
+br\ufc\quixada\entities\Gato.class
+br\ufc\quixada\models\IAnimal.class
+br\ufc\quixada\entities\Cachorro.class
+br\ufc\quixada\models\IEstoque.class
