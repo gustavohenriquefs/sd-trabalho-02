@@ -6,7 +6,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 import br.ufc.quixada.models.IAnimal;
 
-public class Animal extends UnicastRemoteObject implements IAnimal, Serializable {
+public abstract class Animal extends UnicastRemoteObject implements IAnimal, Serializable {
 
     private static final long serialVersionUID = 1L;
 

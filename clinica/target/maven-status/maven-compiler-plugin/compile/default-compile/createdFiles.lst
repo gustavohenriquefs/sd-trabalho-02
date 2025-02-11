@@ -1,6 +1,3 @@
-br\ufc\quixada\stream\PessoasInputStream.class
-br\ufc\quixada\stream\AnimaisInputStream.class
-br\ufc\quixada\stream\PessoasOutputStream.class
 br\ufc\quixada\entities\Animal.class
 br\ufc\quixada\models\ICliente.class
 br\ufc\quixada\Server.class

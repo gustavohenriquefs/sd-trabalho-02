@@ -30,3 +30,14 @@
 -- listar animais
 -- listar animais de um cliente
 - chamando os métodos do objeto de Estoque
+
+
+## RequestResponseProtocol
+
+- Classe que guarda o objeto de referência, o id do método e o payload.
+- Possui métodos para converter o objeto para JSON e de JSON para objeto.
+- Usado para enviar e receber mensagens entre o cliente e o servidor.
+
+## AnimalDTO e ClienteDTO
+
+- Usado para troca de mensagens entre o cliente e o servidor.
