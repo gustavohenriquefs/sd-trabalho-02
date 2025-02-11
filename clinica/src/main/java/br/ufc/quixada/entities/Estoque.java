@@ -5,83 +5,77 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ufc.quixada.models.IAnimal;
-import br.ufc.quixada.models.ICliente;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import br.ufc.quixada.data.RequestResponseProtocol;
+import br.ufc.quixada.dto.AnimalDTO;
+import br.ufc.quixada.dto.ClienteDTO;
 import br.ufc.quixada.models.IEstoque;
 
 public class Estoque extends UnicastRemoteObject implements IEstoque {
 
     private static final long serialVersionUID = 1L;
-
-    private final List<IAnimal> animais;
-    private final List<ICliente> clientes = new ArrayList<>();
+    private final List<ClienteDTO> clientes;
+    private final List<AnimalDTO> animais;
 
     public Estoque() throws RemoteException {
+        super();
+        this.clientes = new ArrayList<>();
         this.animais = new ArrayList<>();
     }
 
-    public List<IAnimal> getAnimais() {
-        return new ArrayList<>(animais);
-    }
-
     @Override
-    public void adicionarCliente(ICliente cliente) throws RemoteException {
-        clientes.add(cliente);
-        System.out.println("Cliente adicionado ao estoque: " + cliente.getNome());
-    }
+    public String doOperation(String jsonRequest) throws RemoteException {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            RequestResponseProtocol request = RequestResponseProtocol.fromJson(jsonRequest);
 
-    @Override
-    public void adicionarAnimal(IAnimal animal) throws RemoteException {
-        boolean clienteExiste = false;
-        
-        for (ICliente c : clientes) {
-            if (c.getCpf().equals(animal.getCpfDono())) {
-                clienteExiste = true;
-                break;
+            String methodId = request.getMethodId();
+            String responsePayload = "";
+
+            switch (methodId) {
+                case "adicionarCliente":
+                    ClienteDTO cliente = objectMapper.readValue(request.getPayload(), ClienteDTO.class);
+                    clientes.add(cliente);
+                    responsePayload = "Cliente adicionado com sucesso.";
+                    break;
+
+                case "adicionarAnimal":
+                    AnimalDTO animal = objectMapper.readValue(request.getPayload(), AnimalDTO.class);
+                    boolean clienteExiste = clientes.stream().anyMatch(c -> c.getCpf().equals(animal.getCpfDono()));
+
+                    if (!clienteExiste) {
+                        responsePayload = "Erro: Cliente não encontrado.";
+                    } else {
+                        animais.add(animal);
+                        responsePayload = "Animal adicionado com sucesso.";
+                    }
+                    break;
+
+                case "listarAnimais":
+                    responsePayload = objectMapper.writeValueAsString(animais);
+                    break;
+
+                case "listarAnimaisPorDono":
+                    String cpfDono = request.getPayload();
+                    List<AnimalDTO> animaisDono = new ArrayList<>();
+                    for (AnimalDTO a : animais) {
+                        if (a.getCpfDono().equals(cpfDono)) {
+                            animaisDono.add(a);
+                        }
+                    }
+                    responsePayload = objectMapper.writeValueAsString(animaisDono);
+                    break;
+
+                default:
+                    responsePayload = "Método não encontrado.";
             }
+
+            return new RequestResponseProtocol("Estoque", methodId, responsePayload).toJson();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "{ \"error\": \"Erro no processamento da requisição.\" }";
         }
-
-        if (!clienteExiste) {
-            throw new RemoteException("Cliente não encontrado.");
-        }
-
-        animais.add(animal);
-
-        System.out.println("Animal adicionado ao estoque: " + animal.getNome());
-    }
-
-    @Override
-    public void removerAnimal(IAnimal animal) throws RemoteException {
-        animais.removeIf(a -> {
-            try {
-                return a.getNome().equals(animal.getNome());
-            } catch (RemoteException e) {
-                e.printStackTrace();
-                return false;
-            }
-        });
-    }
-
-    @Override
-    public String listarAnimais() throws RemoteException {
-        if (animais.isEmpty()) {
-            return "Nenhum animal no estoque.";
-        }
-        StringBuilder lista = new StringBuilder("Animais no estoque:\n");
-        for (IAnimal a : animais) {
-            lista.append(a.getNome()).append("\n");
-        }
-        return lista.toString();
-    }
-
-    @Override
-    public String listarAnimaisPorDono(String cpfDono) throws RemoteException {
-        StringBuilder lista = new StringBuilder("Animais do dono " + cpfDono + ":\n");
-        for (IAnimal a : animais) {
-            if (a.getCpfDono().equals(cpfDono)) {
-                lista.append(a.getNome()).append("\n");
-            }
-        }
-        return lista.length() == 0 ? "Nenhum animal encontrado para este dono." : lista.toString();
     }
 }

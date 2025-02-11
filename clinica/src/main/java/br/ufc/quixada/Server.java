@@ -11,17 +11,10 @@ public class Server {
 
     public static void main(String[] args) {
         try {
-            // Criar e iniciar o RMI Registry na porta 5000
-            Registry registry = LocateRegistry.createRegistry(5000);
-
-            // Criar instância do objeto remoto
+            Registry registry = LocateRegistry.createRegistry(4999);
             IEstoque estoque = new Estoque();
-
-            // Registrar o objeto no RMI Registry
             registry.rebind("Estoque", estoque);
-
             System.out.println("Servidor RMI rodando...");
-
         } catch (RemoteException e) {
             e.printStackTrace();
         }
