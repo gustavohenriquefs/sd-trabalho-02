@@ -3,6 +3,7 @@ C:\Workspace\UFC\SistemasDistribuidos\Listas\trabalho-02\clinica\src\main\java\b
 C:\Workspace\UFC\SistemasDistribuidos\Listas\trabalho-02\clinica\src\main\java\br\ufc\quixada\dto\AnimalDTO.java
 C:\Workspace\UFC\SistemasDistribuidos\Listas\trabalho-02\clinica\src\main\java\br\ufc\quixada\dto\ClienteDTO.java
 C:\Workspace\UFC\SistemasDistribuidos\Listas\trabalho-02\clinica\src\main\java\br\ufc\quixada\models\IAnimal.java
+C:\Workspace\UFC\SistemasDistribuidos\Listas\trabalho-02\clinica\src\main\java\br\ufc\quixada\models\IRequestResponseProtocol.java
 C:\Workspace\UFC\SistemasDistribuidos\Listas\trabalho-02\clinica\src\main\java\br\ufc\quixada\Server.java
 C:\Workspace\UFC\SistemasDistribuidos\Listas\trabalho-02\clinica\src\main\java\br\ufc\quixada\entities\Cachorro.java
 C:\Workspace\UFC\SistemasDistribuidos\Listas\trabalho-02\clinica\src\main\java\br\ufc\quixada\models\IEstoque.java
@@ -10,5 +11,6 @@ C:\Workspace\UFC\SistemasDistribuidos\Listas\trabalho-02\clinica\src\main\java\b
 C:\Workspace\UFC\SistemasDistribuidos\Listas\trabalho-02\clinica\src\main\java\br\ufc\quixada\entities\Cliente.java
 C:\Workspace\UFC\SistemasDistribuidos\Listas\trabalho-02\clinica\src\main\java\br\ufc\quixada\entities\Gato.java
 C:\Workspace\UFC\SistemasDistribuidos\Listas\trabalho-02\clinica\src\main\java\br\ufc\quixada\models\ICliente.java
+C:\Workspace\UFC\SistemasDistribuidos\Listas\trabalho-02\clinica\src\main\java\br\ufc\quixada\data\RemoteObjectRef.java
 C:\Workspace\UFC\SistemasDistribuidos\Listas\trabalho-02\clinica\src\main\java\br\ufc\quixada\entities\Estoque.java
 C:\Workspace\UFC\SistemasDistribuidos\Listas\trabalho-02\clinica\src\main\java\br\ufc\quixada\entities\Coelho.java
